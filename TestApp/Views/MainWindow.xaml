@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:TestApp.Views"
     xmlns:viewModels="clr-namespace:TestApp.ViewModels"
     Title="{Binding Path=Title}"
     Width="525"
@@ -11,6 +12,13 @@
     d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
     Loaded="MainWindowOnLoaded"
     mc:Ignorable="d">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModels:PersonDetailViewModel}">
+            <views:PersonDetailView/>
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -41,7 +49,7 @@
                 Content="Load persons" />
         </Grid>
         <Grid Grid.Column="1">
-            <ContentControl Margin="0,0,0,19.96"/>
+            <ContentControl Margin="0,0,0,19.96" Content="{Binding SelectedPersonDetails}"/>
             <Button Content="Export job data" Height="19.96" VerticalAlignment="Bottom"/>
         </Grid>
     </Grid>

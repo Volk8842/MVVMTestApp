@@ -13,6 +13,8 @@ namespace TestApp.ViewModels
             this.person = person;
         }
 
+        public Person Person => this.person;
+
         public string Name => $"{this.person.FirstName} {this.person.LastName}";
 
         public string Job => this.person.Job.Name;

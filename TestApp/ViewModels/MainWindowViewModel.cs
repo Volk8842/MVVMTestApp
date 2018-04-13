@@ -25,6 +25,8 @@ namespace TestApp.ViewModels
 
         private PersonViewModel selectedPerson;
 
+        private PersonDetailViewModel selectedPersonDetails;
+
         public MainWindowViewModel(IPersonRepository personRepository)
         {
             this.personRepository = personRepository;
@@ -50,6 +52,12 @@ namespace TestApp.ViewModels
             set => this.SetProperty(ref this.selectedPerson, value);
         }
 
+        public PersonDetailViewModel SelectedPersonDetails
+        {
+            get => this.selectedPersonDetails;
+            set => this.SetProperty(ref this.selectedPersonDetails, value); 
+        }
+
         private async void LoadPersonExecute()
         {
             List<Person> rawPersons = await this.personRepository.GetAll();
@@ -58,6 +66,10 @@ namespace TestApp.ViewModels
 
         private void SelectedPersonChangedHandler(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
+            if (this.SelectedPerson != null)
+            {
+                this.SelectedPersonDetails = new PersonDetailViewModel(this.SelectedPerson.Person);
+            }
         }
     }
 }
