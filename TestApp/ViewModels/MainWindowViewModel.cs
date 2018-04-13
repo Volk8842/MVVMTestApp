@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
+using System.Threading.Tasks;
 
 using Common.Intefaces;
 
@@ -22,9 +23,9 @@ namespace TestApp.ViewModels
         private string title = "TestApp";
 
         private DelegateCommand loadPersonsCommand;
+        private DelegateCommand exportJobDataCommand;
 
         private PersonViewModel selectedPerson;
-
         private PersonDetailViewModel selectedPersonDetails;
 
         public MainWindowViewModel(IPersonRepository personRepository)
@@ -37,6 +38,8 @@ namespace TestApp.ViewModels
         }
 
         public DelegateCommand LoadPersonsCommand => this.loadPersonsCommand ?? (this.loadPersonsCommand = new DelegateCommand(this.LoadPersonExecute));
+
+        public DelegateCommand ExportJobDataCommand => this.exportJobDataCommand ?? (this.exportJobDataCommand = new DelegateCommand(this.ExportJobDataExecute));
 
         public ICollectionView Persons { get; }
 
@@ -55,7 +58,7 @@ namespace TestApp.ViewModels
         public PersonDetailViewModel SelectedPersonDetails
         {
             get => this.selectedPersonDetails;
-            set => this.SetProperty(ref this.selectedPersonDetails, value); 
+            set => this.SetProperty(ref this.selectedPersonDetails, value);
         }
 
         private async void LoadPersonExecute()
@@ -70,6 +73,11 @@ namespace TestApp.ViewModels
             {
                 this.SelectedPersonDetails = new PersonDetailViewModel(this.SelectedPerson.Person);
             }
+        }
+
+        private async void ExportJobDataExecute()
+        {
+            Console.WriteLine("Extracting job data...");
         }
     }
 }

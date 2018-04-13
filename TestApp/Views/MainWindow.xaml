@@ -50,7 +50,7 @@
         </Grid>
         <Grid Grid.Column="1">
             <ContentControl Margin="0,0,0,19.96" Content="{Binding SelectedPersonDetails}"/>
-            <Button Content="Export job data" Height="19.96" VerticalAlignment="Bottom"/>
+            <Button Content="Export job data" Height="19.96" VerticalAlignment="Bottom" Command="{Binding ExportJobDataCommand, Mode=OneWay}"/>
         </Grid>
     </Grid>
 </Window>
