@@ -14,5 +14,9 @@ namespace TestApp.ViewModels
         }
 
         public string Name => $"{this.person.FirstName} {this.person.LastName}";
+
+        public string Job => this.person.Job.Name;
+
+        public string Salary => $"$ {this.person.Job.Salary:0.00}";
     }
 }
