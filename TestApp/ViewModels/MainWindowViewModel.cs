@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 using System.Threading.Tasks;
+using System.Xml;
 
 using Common.Intefaces;
 
@@ -66,6 +67,39 @@ namespace TestApp.ViewModels
             List<Person> rawPersons = await this.personRepository.GetAll();
             this.persons.AddRange(rawPersons.Select(p => new PersonViewModel(p)).ToList());
         }
+
+        private async void ExportJobDataExecute()
+        {
+            Console.WriteLine("Extracting job data...");
+            List<Person> rawPersons = await this.personRepository.GetAll();
+            await this.ExportJobDataAsync(rawPersons);
+        }
+
+        private async Task ExportJobDataAsync(List<Person> rawPersons) => await Task.Run(() =>
+        {
+            var allPersonsJobsQuery = from item in rawPersons
+                                      select new { item.Job.Name, item.Job.Salary };
+
+            var jobsQuery = from item in allPersonsJobsQuery
+                            group item by item.Name into jobGroup
+                            select new { jobGroup.Key, AverageSalary = jobGroup.Average(item => item.Salary) };
+
+            using (XmlWriter writer = XmlWriter.Create("JobData.xml"))
+            {
+                writer.WriteStartDocument();
+                writer.WriteStartElement("Jobs");
+                foreach (var item in jobsQuery)
+                {
+                    writer.WriteStartElement("Job");
+                    writer.WriteAttributeString("Name", item.Key);
+                    writer.WriteAttributeString("AverageSalary", $"{item.AverageSalary:0.00}");
+                    writer.WriteEndElement();
+                }
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+                writer.Flush();
+            }
+        });
 
         private void SelectedPersonChangedHandler(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
