@@ -6,14 +6,24 @@ namespace TestApp.ViewModels
 {
     public class PersonViewModel : BindableBase
     {
-        private readonly Person person;
+        private Person person;
 
         public PersonViewModel(Person person)
         {
             this.person = person;
         }
 
-        public Person Person => this.person;
+        public Person Person
+        {
+            get => this.person;
+            set
+            {
+                this.person = value;
+                this.RaisePropertyChanged("Name");
+                this.RaisePropertyChanged("Job");
+                this.RaisePropertyChanged("Salary");
+            }
+        }
 
         public string Name => $"{this.person.FirstName} {this.person.LastName}";
 

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Data;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Xml;
 
 using Common.Intefaces;
@@ -105,13 +105,8 @@ namespace TestApp.ViewModels
         {
             if (this.SelectedPerson != null)
             {
-                this.SelectedPersonDetails = new PersonDetailViewModel(this.SelectedPerson.Person);
+                this.SelectedPersonDetails = new PersonDetailViewModel(this.SelectedPerson);
             }
-        }
-
-        private async void ExportJobDataExecute()
-        {
-            Console.WriteLine("Extracting job data...");
         }
     }
 }

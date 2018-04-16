@@ -11,28 +11,26 @@
     <StackPanel Margin="0" VerticalAlignment="Top">
         <Grid Height="30" VerticalAlignment="Top">
             <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="FirstName" Margin="6,7,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="textBox" TextWrapping="Wrap" Margin="64.797,6,6,0" VerticalAlignment="Top" Text="{Binding FirstName, Mode=OneWay}"/>
+            <TextBox x:Name="textBox" TextWrapping="Wrap" Margin="64.797,6,6,0" VerticalAlignment="Top" Text="{Binding FirstName, Mode=TwoWay}"/>
         </Grid>
         <Grid Height="30" VerticalAlignment="Top">
             <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="LastName" Margin="6,7,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="textBox1" TextWrapping="Wrap" Margin="63.613,6,6,0" VerticalAlignment="Top" Text="{Binding LastName, Mode=OneWay}"/>
+            <TextBox x:Name="textBox1" TextWrapping="Wrap" Margin="63.613,6,6,0" VerticalAlignment="Top" Text="{Binding LastName, Mode=TwoWay}"/>
         </Grid>
         <Grid Height="30" VerticalAlignment="Top">
             <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" TextWrapping="Wrap" Text="BirthDay" Margin="6,7,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="textBox2" TextWrapping="Wrap" Margin="56.143,6,6,0" VerticalAlignment="Top" Text="{Binding BirthDay, Mode=OneWay}"/>
+            <TextBox x:Name="textBox2" TextWrapping="Wrap" Margin="56.143,6,6,0" VerticalAlignment="Top" Text="{Binding BirthDay, Mode=TwoWay}"/>
         </Grid>
         <Grid Height="30" VerticalAlignment="Top">
             <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Job" Margin="6,7,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="textBox3" TextWrapping="Wrap" Margin="29.367,6,6,0" VerticalAlignment="Top" Text="{Binding Job, Mode=OneWay}"/>
+            <TextBox x:Name="textBox3" TextWrapping="Wrap" Margin="29.367,6,6,0" VerticalAlignment="Top" Text="{Binding Job, Mode=TwoWay}"/>
         </Grid>
         <Grid Height="30" VerticalAlignment="Top">
             <TextBlock x:Name="textBlock4" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Salary" Margin="6,7,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="textBox4" TextWrapping="Wrap" Margin="42.473,6,6,0" VerticalAlignment="Top" Text="{Binding Salary, Mode=OneWay}"/>
+            <TextBox x:Name="textBox4" TextWrapping="Wrap" Margin="42.473,6,6,0" VerticalAlignment="Top" Text="{Binding Salary, Mode=TwoWay}"/>
         </Grid>
         <Grid VerticalAlignment="Top" Height="32">
-            <Button Content="Save" HorizontalAlignment="Left" Width="80" Margin="6,6,0,6.04"/>
-            <Button Content="Close" Margin="0,6,6,6.04" HorizontalAlignment="Right" Width="80"/>
-
+            <Button Content="Save" HorizontalAlignment="Left" Width="80" Margin="6,6,0,6.04" Command="{Binding SaveCommand, Mode=OneWay}"/>
         </Grid>
     </StackPanel>
 </UserControl>
