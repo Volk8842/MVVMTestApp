@@ -99,6 +99,7 @@ namespace TestApp.ViewModels
                 writer.WriteEndDocument();
                 writer.Flush();
             }
+            Console.WriteLine("Extracting job data finished");
         });
 
         private void SelectedPersonChangedHandler(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
