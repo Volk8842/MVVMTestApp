@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -19,13 +18,6 @@ namespace TestApp.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        public class AverageSalaryData
-        {
-            public string JobName { get; set; }
-
-            public decimal AverageSalary { get; set; }
-        }
-
         private readonly ObservableCollection<PersonViewModel> persons = new ObservableCollection<PersonViewModel>();
         private readonly IPersonRepository personRepository;
 
@@ -78,17 +70,23 @@ namespace TestApp.ViewModels
             await this.ExportJobDataAsync(rawPersons);
         }
 
-        private async Task ExportJobDataAsync(List<Person> rawPersons) => await Task.Run(() =>
+        private async Task ExportJobDataAsync(List<Person> rawPersons)
         {
-            var jobAverageSalary = rawPersons.GroupBy(p => p.Job.Name)
-                    .Select(g => new AverageSalaryData() { JobName = g.Key, AverageSalary = g.Average(p => p.Job.Salary) })
-                    .ToList();
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<AverageSalaryData>));
-            using (FileStream file = File.Create("JobData.xml"))
-            {
-                xmlSerializer.Serialize(file, jobAverageSalary);
-            }
-        });
+            await Task.Run(
+                () =>
+                    {
+                        var jobAverageSalary = rawPersons
+                            .GroupBy(p => p.Job.Name)
+                            .Select(g => new AverageSalaryData(g.Key, g.Average(p => p.Job.Salary)))
+                            .ToArray();
+
+                        var serializer = new XmlSerializer(typeof(AverageSalaryData[]));
+                        using (var stream = File.Create("JobData.xml"))
+                        {
+                            serializer.Serialize(stream, jobAverageSalary);
+                        }
+                    });
+        }
 
         private void SelectedPersonChangedHandler(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {

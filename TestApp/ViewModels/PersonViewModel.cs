@@ -6,8 +6,6 @@ namespace TestApp.ViewModels
 {
     public class PersonViewModel : BindableBase
     {
-        private Person person;
-
         private string firstName;
         private string lastName;
         private DateTime birthDay;
@@ -16,7 +14,7 @@ namespace TestApp.ViewModels
 
         public PersonViewModel(Person person)
         {
-            this.person = person;
+            this.Person = person;
 
             this.firstName = person.FirstName;
             this.lastName = person.LastName;
@@ -55,13 +53,13 @@ namespace TestApp.ViewModels
             set => this.SetProperty(ref this.salary, value);
         }
 
-        public Person Person => this.person;
+        public Person Person { get; }
 
-        public string FullName => $"{this.person.FirstName} {this.person.LastName}";
+        public string FullName => $"{this.Person.FirstName} {this.Person.LastName}";
 
-        public string JobText => this.person.Job.Name;
+        public string JobText => this.Person.Job.Name;
 
-        public string SalaryText => $"$ {this.person.Job.Salary:0.00}";
+        public string SalaryText => $"$ {this.Person.Job.Salary:0.00}";
 
         public void ApplyChanges()
         {
@@ -70,9 +68,9 @@ namespace TestApp.ViewModels
             this.Person.BirthDay = this.BirthDay;
             this.Person.Job.Name = this.Job;
             this.Person.Job.Salary = this.Salary;
-            this.RaisePropertyChanged("FullName");
-            this.RaisePropertyChanged("JobText");
-            this.RaisePropertyChanged("SalaryText");
+            this.RaisePropertyChanged(nameof(this.FullName));
+            this.RaisePropertyChanged(nameof(this.JobText));
+            this.RaisePropertyChanged(nameof(this.SalaryText));
         }
 
         public void DropChanges()

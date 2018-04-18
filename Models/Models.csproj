@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\PersonContext.cs" />
+    <Compile Include="Models\AverageSalaryData.cs" />
     <Compile Include="PersonDbInitializer.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\Person.cs" />

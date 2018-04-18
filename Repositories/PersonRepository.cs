@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Common.Intefaces;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 using Models;
 using Models.Context;
@@ -28,16 +29,11 @@ namespace Repositories
             }
         }
 
-        public async Task Modify(Person source)
+        public async Task Modify(Person person)
         {
             using (var personContext = new PersonContext())
             {
-                Person modifiedPerson = await personContext.Persons.Include(p => p.Job).FirstOrDefaultAsync(p => p.Id == source.Id);
-                modifiedPerson.FirstName = source.FirstName;
-                modifiedPerson.LastName = source.LastName;
-                modifiedPerson.BirthDay = source.BirthDay;
-                modifiedPerson.Job.Name = source.Job.Name;
-                modifiedPerson.Job.Salary = source.Job.Salary;
+                personContext.Update(person);
                 await personContext.SaveChangesAsync();
             }
         }

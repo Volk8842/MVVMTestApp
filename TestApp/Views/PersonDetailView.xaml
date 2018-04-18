@@ -1,36 +1,87 @@
-﻿<UserControl x:Class="TestApp.Views.PersonDetailView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TestApp.Views"
-             xmlns:viewModels="clr-namespace:TestApp.ViewModels"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             d:DataContext="{d:DesignInstance Type=viewModels:PersonViewModel}">
+﻿<UserControl
+    x:Class="TestApp.Views.PersonDetailView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModels="clr-namespace:TestApp.ViewModels"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    d:DataContext="{d:DesignInstance Type=viewModels:PersonViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="0" Grid.Row="0" Text="FirstName" TextWrapping="Wrap"/>
-        <TextBlock Grid.Column="0" Grid.Row="1" Text="LastName" TextWrapping="Wrap"/>
-        <TextBlock Grid.Column="0" Grid.Row="2" Text="BirthDay" TextWrapping="Wrap"/>
-        <TextBlock Grid.Column="0" Grid.Row="3" Text="Job" TextWrapping="Wrap"/>
-        <TextBlock Grid.Column="0" Grid.Row="4" Text="Salary" TextWrapping="Wrap"/>
-        <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding FirstName, Mode=TwoWay}"/>
-        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding LastName, Mode=TwoWay}"/>
-        <DatePicker Grid.Column="1" Grid.Row="2" SelectedDate="{Binding BirthDay, Mode=TwoWay}"/>
-        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Job, Mode=TwoWay}"/>
-        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Salary, Mode=TwoWay}"/>
-        <Button Grid.Row="5" Grid.ColumnSpan="2" Content="Save" Command="{Binding ElementName=main, Path=DataContext.SaveCommand}"/>
+        <TextBlock
+            Grid.Column="0"
+            Grid.Row="0"
+            Margin="{StaticResource StdMargin}"
+            Text="FirstName"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Grid.Column="0"
+            Grid.Row="1"
+            Margin="{StaticResource StdMargin}"
+            Text="LastName"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Grid.Column="0"
+            Grid.Row="2"
+            Margin="{StaticResource StdMargin}"
+            Text="BirthDay"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Grid.Column="0"
+            Grid.Row="3"
+            Text="Job"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Grid.Column="0"
+            Grid.Row="4"
+            Margin="{StaticResource StdMargin}"
+            Text="Salary"
+            TextWrapping="Wrap" />
+        <TextBox
+            Grid.Column="1"
+            Grid.Row="0"
+            Margin="{StaticResource StdMargin}"
+            Text="{Binding FirstName, Mode=TwoWay}" />
+        <TextBox
+            Grid.Column="1"
+            Grid.Row="1"
+            Margin="{StaticResource StdMargin}"
+            Text="{Binding LastName, Mode=TwoWay}" />
+        <DatePicker
+            Grid.Column="1"
+            Grid.Row="2"
+            Margin="{StaticResource StdMargin}"
+            SelectedDate="{Binding BirthDay, Mode=TwoWay}" />
+        <TextBox
+            Grid.Column="1"
+            Grid.Row="3"
+            Margin="{StaticResource StdMargin}"
+            Text="{Binding Job, Mode=TwoWay}" />
+        <TextBox
+            Grid.Column="1"
+            Grid.Row="4"
+            Margin="{StaticResource StdMargin}"
+            Text="{Binding Salary, Mode=TwoWay}" />
+        <Button
+            Grid.Row="5"
+            Grid.ColumnSpan="2"
+            Grid.Column="0"
+            Margin="{StaticResource StdMargin}"
+            Content="Save"
+            Command="{Binding ElementName=main, Path=DataContext.SaveCommand}" />
     </Grid>
 </UserControl>
