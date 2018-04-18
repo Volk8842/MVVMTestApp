@@ -10,5 +10,7 @@ namespace Common.Intefaces
         Task<List<Person>> GetAll();
 
         Task<Person> Find(int id);
+
+        Task Modify(Person source);
     }
 }

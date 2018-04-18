@@ -27,5 +27,19 @@ namespace Repositories
                 return await personContext.Persons.Include(p => p.Job).ToListAsync();
             }
         }
+
+        public async Task Modify(Person source)
+        {
+            using (var personContext = new PersonContext())
+            {
+                Person modifiedPerson = await personContext.Persons.Include(p => p.Job).FirstOrDefaultAsync(p => p.Id == source.Id);
+                modifiedPerson.FirstName = source.FirstName;
+                modifiedPerson.LastName = source.LastName;
+                modifiedPerson.BirthDay = source.BirthDay;
+                modifiedPerson.Job.Name = source.Job.Name;
+                modifiedPerson.Job.Salary = source.Job.Salary;
+                await personContext.SaveChangesAsync();
+            }
+        }
     }
 }

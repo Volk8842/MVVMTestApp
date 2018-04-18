@@ -33,6 +33,7 @@ namespace TestApp.ViewModels
 
         private DelegateCommand loadPersonsCommand;
         private DelegateCommand exportJobDataCommand;
+        private DelegateCommand saveCommand;
 
         private PersonViewModel selectedPerson;
 
@@ -48,6 +49,8 @@ namespace TestApp.ViewModels
         public DelegateCommand LoadPersonsCommand => this.loadPersonsCommand ?? (this.loadPersonsCommand = new DelegateCommand(this.LoadPersonExecute));
 
         public DelegateCommand ExportJobDataCommand => this.exportJobDataCommand ?? (this.exportJobDataCommand = new DelegateCommand(this.ExportJobDataExecute));
+
+        public DelegateCommand SaveCommand => this.saveCommand ?? (this.saveCommand = new DelegateCommand(this.SavePersonExecute));
 
         public ICollectionView Persons { get; }
 
@@ -90,6 +93,13 @@ namespace TestApp.ViewModels
 
         private void SelectedPersonChangedHandler(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
+            this.SelectedPerson.DropChanges();
+        }
+
+        private async void SavePersonExecute()
+        {
+            this.SelectedPerson.ApplyChanges();
+            await this.personRepository.Modify(this.SelectedPerson.Person);
         }
     }
 }

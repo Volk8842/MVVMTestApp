@@ -19,6 +19,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0" Grid.Row="0" Text="FirstName" TextWrapping="Wrap"/>
         <TextBlock Grid.Column="0" Grid.Row="1" Text="LastName" TextWrapping="Wrap"/>
@@ -30,5 +31,6 @@
         <DatePicker Grid.Column="1" Grid.Row="2" SelectedDate="{Binding BirthDay, Mode=TwoWay}"/>
         <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Job, Mode=TwoWay}"/>
         <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Salary, Mode=TwoWay}"/>
+        <Button Grid.Row="5" Grid.ColumnSpan="2" Content="Save" Command="{Binding ElementName=main, Path=DataContext.SaveCommand}"/>
     </Grid>
 </UserControl>

@@ -11,6 +11,7 @@
     Height="350"
     d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}"
     Loaded="MainWindowOnLoaded"
+    x:Name="main"
     mc:Ignorable="d">
 
     <Window.Resources>
@@ -42,7 +43,7 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
                             <TextBlock Text="{Binding Path=FullName}" />
-                            <TextBlock Grid.Row="1" Text="{Binding Path=Job}" />
+                            <TextBlock Grid.Row="1" Text="{Binding Path=JobText}" />
                             <TextBlock Grid.Row="2" Text="{Binding Path=SalaryText}" />
                         </Grid>
                     </DataTemplate>

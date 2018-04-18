@@ -6,14 +6,14 @@ namespace TestApp.ViewModels
 {
     public class PersonViewModel : BindableBase
     {
-        private readonly Person person;
+        private Person person;
 
         private string firstName;
         private string lastName;
         private DateTime birthDay;
         private string job;
         private decimal salary;
-        
+
         public PersonViewModel(Person person)
         {
             this.person = person;
@@ -55,8 +55,33 @@ namespace TestApp.ViewModels
             set => this.SetProperty(ref this.salary, value);
         }
 
+        public Person Person => this.person;
+
         public string FullName => $"{this.person.FirstName} {this.person.LastName}";
 
-        public string SalaryText => $"$ {this.salary:0.00}";
+        public string JobText => this.person.Job.Name;
+
+        public string SalaryText => $"$ {this.person.Job.Salary:0.00}";
+
+        public void ApplyChanges()
+        {
+            this.Person.FirstName = this.FirstName;
+            this.Person.LastName = this.LastName;
+            this.Person.BirthDay = this.BirthDay;
+            this.Person.Job.Name = this.Job;
+            this.Person.Job.Salary = this.Salary;
+            this.RaisePropertyChanged("FullName");
+            this.RaisePropertyChanged("JobText");
+            this.RaisePropertyChanged("SalaryText");
+        }
+
+        public void DropChanges()
+        {
+            this.FirstName = this.Person.FirstName;
+            this.LastName = this.Person.LastName;
+            this.BirthDay = this.Person.BirthDay;
+            this.Job = this.Person.Job.Name;
+            this.Salary = this.Person.Job.Salary;
+        }
     }
 }
