@@ -80,14 +80,13 @@ namespace TestApp.ViewModels
 
         private async Task ExportJobDataAsync(List<Person> rawPersons) => await Task.Run(() =>
         {
-            var jobAverageSalary = rawPersons.GroupBy(p => p.Job.Name).ToDictionary(g => g.Key, g => g.Average(p => p.Job.Salary));
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(AverageSalaryData));
+            var jobAverageSalary = rawPersons.GroupBy(p => p.Job.Name)
+                    .Select(g => new AverageSalaryData() { JobName = g.Key, AverageSalary = g.Average(p => p.Job.Salary) })
+                    .ToList();
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<AverageSalaryData>));
             using (FileStream file = File.Create("JobData.xml"))
             {
-                foreach (var item in jobAverageSalary)
-                {
-                    xmlSerializer.Serialize(file, new AverageSalaryData() { JobName = item.Key, AverageSalary = item.Value });
-                }
+                xmlSerializer.Serialize(file, jobAverageSalary);
             }
         });
 
